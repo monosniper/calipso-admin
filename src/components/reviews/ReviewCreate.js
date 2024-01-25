@@ -12,6 +12,7 @@ import {
     FileInput,
     ReferenceInput,
     SelectArrayInput,
+    RadioButtonGroupInput,
     ReferenceArrayInput,
     ImageInput,
     ImageField,
@@ -55,48 +56,38 @@ const ReviewCreate = withStyles({ card: { overflow: 'initial' } })(props => {
         <Create {...props}>
             <SimpleForm>
                 <TextInput
-                    source="title" label='Название'
+                    source="title" label='Заголовок'
                     fullWidth
                     validate={requiredValidate}
                     helperText={false}
                     formClassName={classes.title}
                     id='title'
                 />
-                <RichTextInput label='Описание' validate={requiredValidate} source="description" formClassName={classes.description} />
+                <RichTextInput label='Текст' validate={requiredValidate} source="conent" formClassName={classes.description} />
                 <div style={{display: "flex", width: '100%', gap: 32}}>
-                    <NumberInput
-                        source="price"
-                        label='Цена'
-                        validate={requiredValidate}
-                        formClassName={classes.field}
-                    />
-                    <SelectInput source="status" choices={[
-                        { id: 'moderation', name: 'Модерация' },
-                        { id: 'active', name: 'Активный' },
-                        { id: 'rejected', name: 'Отклонен' },
+                    <RadioButtonGroupInput source="rating" choices={[
+                        { id: '1', name: '1' },
+                        { id: '2', name: '2' },
+                        { id: '3', name: '3' },
+                        { id: '4', name: '4' },
+                        { id: '5', name: '5' },
+                    ]} />
+                    <SelectInput label="Тип" source="reviewable_type" choices={[
+                        { id: 'lot', name: 'Лот' },
+                        { id: 'user', name: 'Пользователь' },
                     ]} />
                 </div>
                 <div style={{display: "flex", width: '100%', gap: 32}}>
-                    <ReferenceInput label="Категория" source="category_id" reference="categories/shop" validate={requiredValidate}>
+                    <ReferenceInput label="Лот" source="reviewable_id" reference="lots">
+                        <SelectInput optionText="title" optionValue="id" />
+                    </ReferenceInput>
+                    <ReferenceInput label="Пользователь" source="reviewable_id" reference="users">
                         <SelectInput optionText="name" optionValue="id" />
                     </ReferenceInput>
-                    <BooleanInput label="Премиум" source="isPremium" />
                 </div>
-                <ReferenceArrayInput filter={{for: 'orders'}} source="tag_ids" reference="tags">
-                    <SelectArrayInput optionText="name" optionValue={'id'}/>
-                </ReferenceArrayInput>
-                <ArrayInput source="properties" formClassName={classes.min}>
-                    <SimpleFormIterator>
-                        <TextInput source="key" />
-                        <TextInput source="value" />
-                    </SimpleFormIterator>
-                </ArrayInput>
-                <FileInput source="archive" label="Архив" formClassName={classes.min}>
-                    <FileField source="src" title="title" />
-                </FileInput>
-                <ImageInput multiple={true} source="images" label="Картинки" accept="image/*" formClassName={classes.min}>
-                    <ImageField source="src" title="title" />
-                </ImageInput>
+                <ReferenceInput label="Автор" source="user_id" reference="users">
+                    <SelectInput optionText="name" optionValue="id" />
+                </ReferenceInput>
             </SimpleForm>
         </Create>
     );
