@@ -1,9 +1,10 @@
 import React from 'react';
-import {Datagrid, DateField, ExportButton, List, TextField, TextInput, TopToolbar} from "react-admin";
+import {Datagrid, DateField, ExportButton, List, TextField, TextInput, TopToolbar, CreateButton} from "react-admin";
 import SortableDatagridHeader from "../SortableDatagridHeader";
 
 const ListActions = (props) => (
     <TopToolbar>
+        <CreateButton/>
         <ExportButton/>
     </TopToolbar>
 );
