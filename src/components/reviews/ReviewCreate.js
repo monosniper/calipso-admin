@@ -72,22 +72,26 @@ const ReviewCreate = withStyles({ card: { overflow: 'initial' } })(props => {
                         { id: '4', name: '4' },
                         { id: '5', name: '5' },
                     ]} />
-                    <SelectInput label="Тип" source="reviewable_type" choices={[
-                        { id: 'lot', name: 'Лот' },
-                        { id: 'user', name: 'Пользователь' },
-                    ]} />
+                    <input type="hidden" name={'reviewable_type'} value={'user'}/>
+                    {/*<SelectInput label="Тип" source="reviewable_type" choices={[*/}
+                    {/*    { id: 'lot', name: 'Лот' },*/}
+                    {/*    { id: 'user', name: 'Пользователь' },*/}
+                    {/*]} />*/}
                 </div>
                 <div style={{display: "flex", width: '100%', gap: 32}}>
-                    <ReferenceInput label="Лот" source="reviewable_id" reference="lots">
-                        <SelectInput optionText="title" optionValue="id" />
+                    {/*<ReferenceInput label="Лот" source="reviewable_id" reference="lots">*/}
+                    {/*    <SelectInput optionText="title" optionValue="id" />*/}
+                    {/*</ReferenceInput>*/}
+                    <ReferenceInput label="Цель" source="reviewable_id" reference="users">
+                        <SelectInput optionText="username" optionValue="id" />
                     </ReferenceInput>
-                    <ReferenceInput label="Пользователь" source="reviewable_id" reference="users">
+                    <ReferenceInput label="Автор" source="user_id" reference="users">
                         <SelectInput optionText="username" optionValue="id" />
                     </ReferenceInput>
                 </div>
-                <ReferenceInput label="Автор" source="user_id" reference="users">
-                    <SelectInput optionText="username" optionValue="id" />
-                </ReferenceInput>
+                {/*<ReferenceInput label="Автор" source="user_id" reference="users">*/}
+                {/*    <SelectInput optionText="username" optionValue="id" />*/}
+                {/*</ReferenceInput>*/}
             </SimpleForm>
         </Create>
     );
