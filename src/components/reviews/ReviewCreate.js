@@ -63,7 +63,7 @@ const ReviewCreate = withStyles({ card: { overflow: 'initial' } })(props => {
                     formClassName={classes.title}
                     id='title'
                 />
-                <RichTextInput label='Текст' validate={requiredValidate} source="conent" formClassName={classes.description} />
+                <RichTextInput label='Текст' validate={requiredValidate} source="content" formClassName={classes.description} />
                 <div style={{display: "flex", width: '100%', gap: 32}}>
                     <RadioButtonGroupInput source="rating" choices={[
                         { id: '1', name: '1' },
