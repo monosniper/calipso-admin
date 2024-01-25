@@ -3,6 +3,7 @@ import {
     Create,
     SimpleForm,
     TextInput,
+    AutocompleteInput,
     useTranslate,
     BooleanInput,
     PasswordInput,
@@ -83,10 +84,10 @@ const ReviewCreate = withStyles({ card: { overflow: 'initial' } })(props => {
                     {/*    <SelectInput optionText="title" optionValue="id" />*/}
                     {/*</ReferenceInput>*/}
                     <ReferenceInput label="Цель" source="reviewable_id" reference="users">
-                        <SelectInput optionText="username" optionValue="id" />
+                        <AutocompleteInput optionText="username" optionValue="id" />
                     </ReferenceInput>
                     <ReferenceInput label="Автор" source="user_id" reference="users">
-                        <SelectInput optionText="username" optionValue="id" />
+                        <AutocompleteInput optionText="username" optionValue="id" />
                     </ReferenceInput>
                 </div>
                 {/*<ReferenceInput label="Автор" source="user_id" reference="users">*/}
