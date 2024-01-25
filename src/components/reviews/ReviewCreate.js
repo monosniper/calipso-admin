@@ -82,11 +82,11 @@ const ReviewCreate = withStyles({ card: { overflow: 'initial' } })(props => {
                         <SelectInput optionText="title" optionValue="id" />
                     </ReferenceInput>
                     <ReferenceInput label="Пользователь" source="reviewable_id" reference="users">
-                        <SelectInput optionText="name" optionValue="id" />
+                        <SelectInput optionText="username" optionValue="id" />
                     </ReferenceInput>
                 </div>
                 <ReferenceInput label="Автор" source="user_id" reference="users">
-                    <SelectInput optionText="name" optionValue="id" />
+                    <SelectInput optionText="username" optionValue="id" />
                 </ReferenceInput>
             </SimpleForm>
         </Create>
