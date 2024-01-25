@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import LabelIcon from '@material-ui/icons/Label';
 import { makeStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import {
@@ -94,6 +93,17 @@ const Navigation = ({ dense = false }) => {
                     smart_count: 2,
                 })}
                 leftIcon={<orders.icon />}
+                dense={dense}
+            />
+            <MenuItemLink
+                to={{
+                    pathname: '/reviews',
+                    state: { _scrollToTop: true },
+                }}
+                primaryText={translate(`resources.reviews.name`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<reviews.icon />}
                 dense={dense}
             />
             <MenuItemLink

@@ -1,22 +1,74 @@
 import React from 'react';
-import {Datagrid, List} from "react-admin";
+import {
+    ChipField,
+    CreateButton,
+    Datagrid,
+    DateField,
+    ExportButton,
+    List,
+    TextField,
+    TopToolbar
+} from "react-admin";
 import SortableDatagridHeader from "../SortableDatagridHeader";
+import UserField from "../users/UserField";
+import LinkField from "../LinkField";
 
-const ReviewsList = () => {
-    // const headerCells = [
-    //     {id: 'id', label: 'ID'},
-    //     {id: 'first_name', label: 'Пользователь'},
-    //     {id: 'username', label: 'Логин'},
-    //     {id: 'email', label: 'Почта'},
-    //     {id: 'roles', label: 'Роли', sortable: false},
-    //     {id: 'created_at', label: 'Дата регистрации'},
-    // ];
-    //
-    // return (
-    //     <List {...props} sort={{ field: 'created_at', order: 'DESC' }} actions={<ListActions />} filters={filters}>
-    //         <Datagrid {...props} rowClick="edit" header={<SortableDatagridHeader headerCells={headerCells} />} body={<MyDatagridBody />} />
-    //     </List>
-    // );
+const ListActions = (props) => (
+    <TopToolbar>
+        <CreateButton/>
+        <ExportButton/>
+    </TopToolbar>
+);
+
+
+const ReviewText = ({ record }) => {
+    return (
+        <div>
+            <div dangerouslySetInnerHTML={{ __html: record.content }} />
+        </div>
+    );
+};
+
+function ReviewableField({ record, props }) {
+    if(record.reviewable_type === 'App/Models/User') {
+        return <LinkField
+            link={'users'}
+            getId={(record) => record.reviewable_id}
+            isShow={true}
+            field={<UserField {...props} getUser={(record) => record.user} />}
+        />;
+    } else {
+        return <LinkField
+            link={'lots'}
+            getId={(record) => record.reviewable_id}
+            isShow={true}
+            field={<TextField {...props} source={'id'} />}
+        />;
+    }
+}
+
+const ReviewsList = (props) => {
+    const headerCells = [
+        {id: 'id', label: 'ID'},
+        {id: 'title', label: 'Заголовок'},
+        {id: 'rating', label: 'Рейтинг'},
+        {id: 'reviewable_type', label: 'Цель'},
+        {id: 'user', label: 'Автор'},
+        {id: 'created_at', label: 'Дата создания'},
+    ];
+
+    return (
+        <List {...props} sort={{ field: 'created_at', order: 'DESC' }} actions={<ListActions />} filters={filters}>
+            <Datagrid rowClick='edit' expand={<ReviewText />} header={<SortableDatagridHeader headerCells={headerCells} isExpanded={true} />}>
+                <TextField source="id" />
+                <TextField source={'title'} />
+                <ChipField source={'rating'} />
+                <ReviewableField props={props} />
+                <LinkField link={'users'} getId={(record) => record.user.id} isShow={true} field={<UserField {...props} getUser={(record) => record.user} />} />
+                <DateField source="created_at" />
+            </Datagrid>
+        </List>
+    );
 };
 
 export default ReviewsList;
