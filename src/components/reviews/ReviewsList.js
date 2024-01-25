@@ -58,7 +58,7 @@ const ReviewsList = (props) => {
     ];
 
     return (
-        <List {...props} sort={{ field: 'created_at', order: 'DESC' }} actions={<ListActions />} filters={filters}>
+        <List {...props} sort={{ field: 'created_at', order: 'DESC' }} actions={<ListActions />}>
             <Datagrid rowClick='edit' expand={<ReviewText />} header={<SortableDatagridHeader headerCells={headerCells} isExpanded={true} />}>
                 <TextField source="id" />
                 <TextField source={'title'} />
