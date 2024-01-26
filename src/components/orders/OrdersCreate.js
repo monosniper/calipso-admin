@@ -6,6 +6,7 @@ import {
     useTranslate,
     BooleanInput,
     PasswordInput,
+    AutocompleteInput,
     FileField,
     SelectInput,
     required,
@@ -98,7 +99,7 @@ const OrderCreate = withStyles({ card: { overflow: 'initial' } })(props => {
                 </div>
                 <div style={{display: "flex", width: '100%', gap: 32}}>
                     <ReferenceInput label="Категория" source="category_id" reference="categories/freelance" validate={requiredValidate}>
-                        <SelectInput optionText="name" optionValue="id" />
+                        <AutocompleteInput optionText="name" optionValue="id" />
                     </ReferenceInput>
                     <BooleanInput label="Срочный заказ" source="isUrgent" />
                     <BooleanInput label="Работа через сейф" source="isSafe" />

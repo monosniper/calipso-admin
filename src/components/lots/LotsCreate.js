@@ -6,6 +6,7 @@ import {
     useTranslate,
     BooleanInput,
     PasswordInput,
+    AutocompleteInput,
     FileField,
     SelectInput,
     required,
@@ -91,12 +92,12 @@ const LotsCreate = withStyles({ card: { overflow: 'initial' } })(props => {
                 </div>
                 <div style={{display: "flex", width: '100%', gap: 32}}>
                     <ReferenceInput label="Категория" source="category_id" reference="categories/shop" validate={requiredValidate}>
-                        <SelectInput optionText="name" optionValue="id" />
+                        <AutocompleteInput optionText="name" optionValue="id" />
                     </ReferenceInput>
                     <BooleanInput label="Премиум" source="isPremium" />
                 </div>
                 <ReferenceArrayInput filter={{for: 'orders'}} source="tag_ids" reference="tags">
-                    <SelectArrayInput optionText="name" optionValue={'id'}/>
+                    <AutocompleteInput optionText="name" optionValue={'id'}/>
                 </ReferenceArrayInput>
                 <ArrayInput source="properties" formClassName={classes.min}>
                     <SimpleFormIterator>
