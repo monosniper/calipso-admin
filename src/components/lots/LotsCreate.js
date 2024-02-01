@@ -97,7 +97,7 @@ const LotsCreate = withStyles({ card: { overflow: 'initial' } })(props => {
                     <BooleanInput label="Премиум" source="isPremium" />
                 </div>
                 <ReferenceArrayInput filter={{for: 'orders'}} source="tag_ids" reference="tags">
-                    <AutocompleteInput optionText="name" optionValue={'id'}/>
+                    <SelectArrayInput optionText="name"/>
                 </ReferenceArrayInput>
                 <ArrayInput source="properties" formClassName={classes.min}>
                     <SimpleFormIterator>
