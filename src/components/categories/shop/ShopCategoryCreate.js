@@ -4,7 +4,7 @@ import {AutocompleteInput, Create, required, SimpleForm, TextInput} from "react-
 
 export const ShopCategoryCreate = (props) => {
     const [categories, setCategories] = useState([]);
-    const { data, loading, error } = useGetList('categories/shop');
+    const { data, loading, error } = useGetList('categories/shop', {filter: false});
 
     useEffect(() => {
         !loading && setCategories(Object.entries(data).map(item => {
